@@ -6,5 +6,5 @@ import (
 
 type TodoUsecaseInterface interface {
 	GetTodos() ([]*entities.Todo, error)
-	CreateTodo(input *entities.NewTodo) (*entities.Todo, error)
+	CreateTodo(input entities.NewTodo) (*entities.Todo, error)
 }

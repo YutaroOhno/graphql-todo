@@ -1,9 +1,8 @@
-
 package db
 
 import (
-	"github.com/jmoiron/sqlx"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/jmoiron/sqlx"
 	// "os"
 )
 
