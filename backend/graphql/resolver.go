@@ -2,11 +2,12 @@ package graphql
 
 import (
 	"context"
-	"todo-graphql-api/usecases/todos"
-	"todo-graphql-api/entities"
+	"fmt"
+	"graphql-todo/backend/entities"
+	"graphql-todo/backend/usecases/todos"
 ) // THIS CODE IS A STARTING POINT ONLY. IT WILL NOT BE UPDATED WITH SCHEMA CHANGES.
 
-type Resolver struct{
+type Resolver struct {
 	TodoUsecase todos.TodoUsecaseInterface
 }
 
@@ -20,7 +21,8 @@ func (r *Resolver) Query() QueryResolver {
 type mutationResolver struct{ *Resolver }
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input entities.NewTodo) (*entities.Todo, error) {
-	panic("not implemented")
+	fmt.Println(input)
+	return r.TodoUsecase.CreateTodo(&input)
 }
 
 type queryResolver struct{ *Resolver }
