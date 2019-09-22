@@ -1,0 +1,7 @@
+mutation($title: String!, $body: String!) {
+  createTodo(input: {title: $title, body: $body}) {
+    id
+    title
+    body
+  }
+}
