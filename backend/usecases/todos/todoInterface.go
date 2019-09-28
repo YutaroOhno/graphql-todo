@@ -1,10 +1,10 @@
 package todos
 
 import (
-	"github.com/graphql-todo/backend/entities"
+	"github.com/graphql-todo/backend/models"
 )
 
 type TodoUsecaseInterface interface {
-	GetTodos() ([]*entities.Todo, error)
-	CreateTodo(input entities.NewTodo) (*entities.Todo, error)
+	GetTodos() ([]*models.Todo, error)
+	CreateTodo(input models.NewTodo) (*models.Todo, error)
 }

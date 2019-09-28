@@ -3,8 +3,8 @@ package todos
 import (
 	"fmt"
 
-	"github.com/graphql-todo/backend/entities"
 	"github.com/graphql-todo/backend/infrastructure/db"
+	"github.com/graphql-todo/backend/models"
 )
 
 type TodoUsecase struct {
@@ -17,8 +17,8 @@ func NewTodoUsecase(db *db.DB) *TodoUsecase {
 	}
 }
 
-func (usecase *TodoUsecase) GetTodos() ([]*entities.Todo, error) {
-	var todos []*entities.Todo
+func (usecase *TodoUsecase) GetTodos() ([]*models.Todo, error) {
+	var todos []*models.Todo
 
 	err := usecase.DB.SqlxDB.Select(&todos, "select id, title, body from todos")
 	if err != nil {
@@ -28,8 +28,8 @@ func (usecase *TodoUsecase) GetTodos() ([]*entities.Todo, error) {
 	return todos, nil
 }
 
-func (usecase *TodoUsecase) CreateTodo(input entities.NewTodo) (*entities.Todo, error) {
-	var todo entities.Todo
+func (usecase *TodoUsecase) CreateTodo(input models.NewTodo) (*models.Todo, error) {
+	var todo models.Todo
 
 	// insertId取得
 	// lastInsertId := 0

@@ -8,7 +8,12 @@ schema:
 exec:
   filename: generated.go
 model:
-  filename: ../entities/todo.go
+  filename: models_gen.go
+models:
+  NewTodo:
+    model: github.com/graphql-todo/backend/models.NewTodo
+  Todo:
+    model: github.com/graphql-todo/backend/models.Todo
 resolver:
   filename: resolver.go
   type: Resolver

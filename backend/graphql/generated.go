@@ -12,7 +12,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/graphql-todo/backend/entities"
+	"github.com/graphql-todo/backend/models"
 	"github.com/vektah/gqlparser"
 	"github.com/vektah/gqlparser/ast"
 )
@@ -44,7 +44,7 @@ type DirectiveRoot struct {
 
 type ComplexityRoot struct {
 	Mutation struct {
-		CreateTodo func(childComplexity int, input entities.NewTodo) int
+		CreateTodo func(childComplexity int, input models.NewTodo) int
 	}
 
 	Query struct {
@@ -59,10 +59,10 @@ type ComplexityRoot struct {
 }
 
 type MutationResolver interface {
-	CreateTodo(ctx context.Context, input entities.NewTodo) (*entities.Todo, error)
+	CreateTodo(ctx context.Context, input models.NewTodo) (*models.Todo, error)
 }
 type QueryResolver interface {
-	Todos(ctx context.Context) ([]*entities.Todo, error)
+	Todos(ctx context.Context) ([]*models.Todo, error)
 }
 
 type executableSchema struct {
@@ -90,7 +90,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateTodo(childComplexity, args["input"].(entities.NewTodo)), true
+		return e.complexity.Mutation.CreateTodo(childComplexity, args["input"].(models.NewTodo)), true
 
 	case "Query.todos":
 		if e.complexity.Query.Todos == nil {
@@ -214,9 +214,9 @@ type Mutation {
 func (ec *executionContext) field_Mutation_createTodo_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 entities.NewTodo
+	var arg0 models.NewTodo
 	if tmp, ok := rawArgs["input"]; ok {
-		arg0, err = ec.unmarshalNNewTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐNewTodo(ctx, tmp)
+		arg0, err = ec.unmarshalNNewTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐNewTodo(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -301,7 +301,7 @@ func (ec *executionContext) _Mutation_createTodo(ctx context.Context, field grap
 	ctx = ec.Tracer.StartFieldResolverExecution(ctx, rctx)
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateTodo(rctx, args["input"].(entities.NewTodo))
+		return ec.resolvers.Mutation().CreateTodo(rctx, args["input"].(models.NewTodo))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -313,10 +313,10 @@ func (ec *executionContext) _Mutation_createTodo(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*entities.Todo)
+	res := resTmp.(*models.Todo)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx, field.Selections, res)
+	return ec.marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query_todos(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -350,10 +350,10 @@ func (ec *executionContext) _Query_todos(ctx context.Context, field graphql.Coll
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*entities.Todo)
+	res := resTmp.([]*models.Todo)
 	rctx.Result = res
 	ctx = ec.Tracer.StartFieldChildExecution(ctx)
-	return ec.marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx, field.Selections, res)
+	return ec.marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -431,7 +431,7 @@ func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.C
 	return ec.marshalO__Schema2ᚖgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Todo_id(ctx context.Context, field graphql.CollectedField, obj *entities.Todo) (ret graphql.Marshaler) {
+func (ec *executionContext) _Todo_id(ctx context.Context, field graphql.CollectedField, obj *models.Todo) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -468,7 +468,7 @@ func (ec *executionContext) _Todo_id(ctx context.Context, field graphql.Collecte
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Todo_title(ctx context.Context, field graphql.CollectedField, obj *entities.Todo) (ret graphql.Marshaler) {
+func (ec *executionContext) _Todo_title(ctx context.Context, field graphql.CollectedField, obj *models.Todo) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -505,7 +505,7 @@ func (ec *executionContext) _Todo_title(ctx context.Context, field graphql.Colle
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Todo_body(ctx context.Context, field graphql.CollectedField, obj *entities.Todo) (ret graphql.Marshaler) {
+func (ec *executionContext) _Todo_body(ctx context.Context, field graphql.CollectedField, obj *models.Todo) (ret graphql.Marshaler) {
 	ctx = ec.Tracer.StartFieldExecution(ctx, field)
 	defer func() {
 		if r := recover(); r != nil {
@@ -1693,8 +1693,8 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 
 // region    **************************** input.gotpl *****************************
 
-func (ec *executionContext) unmarshalInputNewTodo(ctx context.Context, obj interface{}) (entities.NewTodo, error) {
-	var it entities.NewTodo
+func (ec *executionContext) unmarshalInputNewTodo(ctx context.Context, obj interface{}) (models.NewTodo, error) {
+	var it models.NewTodo
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -1802,7 +1802,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var todoImplementors = []string{"Todo"}
 
-func (ec *executionContext) _Todo(ctx context.Context, sel ast.SelectionSet, obj *entities.Todo) graphql.Marshaler {
+func (ec *executionContext) _Todo(ctx context.Context, sel ast.SelectionSet, obj *models.Todo) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.RequestContext, sel, todoImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -2110,7 +2110,7 @@ func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.Selecti
 	return res
 }
 
-func (ec *executionContext) unmarshalNNewTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐNewTodo(ctx context.Context, v interface{}) (entities.NewTodo, error) {
+func (ec *executionContext) unmarshalNNewTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐNewTodo(ctx context.Context, v interface{}) (models.NewTodo, error) {
 	return ec.unmarshalInputNewTodo(ctx, v)
 }
 
@@ -2128,11 +2128,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx context.Context, sel ast.SelectionSet, v entities.Todo) graphql.Marshaler {
+func (ec *executionContext) marshalNTodo2githubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx context.Context, sel ast.SelectionSet, v models.Todo) graphql.Marshaler {
 	return ec._Todo(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx context.Context, sel ast.SelectionSet, v []*entities.Todo) graphql.Marshaler {
+func (ec *executionContext) marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx context.Context, sel ast.SelectionSet, v []*models.Todo) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -2156,7 +2156,7 @@ func (ec *executionContext) marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋb
 			if !isLen1 {
 				defer wg.Done()
 			}
-			ret[i] = ec.marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx, sel, v[i])
+			ret[i] = ec.marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx, sel, v[i])
 		}
 		if isLen1 {
 			f(i)
@@ -2169,7 +2169,7 @@ func (ec *executionContext) marshalNTodo2ᚕᚖgithubᚗcomᚋgraphqlᚑtodoᚋb
 	return ret
 }
 
-func (ec *executionContext) marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋentitiesᚐTodo(ctx context.Context, sel ast.SelectionSet, v *entities.Todo) graphql.Marshaler {
+func (ec *executionContext) marshalNTodo2ᚖgithubᚗcomᚋgraphqlᚑtodoᚋbackendᚋmodelsᚐTodo(ctx context.Context, sel ast.SelectionSet, v *models.Todo) graphql.Marshaler {
 	if v == nil {
 		if !ec.HasError(graphql.GetResolverContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")

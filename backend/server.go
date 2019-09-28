@@ -8,7 +8,7 @@ import (
 	"github.com/graphql-todo/backend/graphql"
 
 	"github.com/graphql-todo/backend/infrastructure/db"
-	"github.com/graphql-todo/backend/usecases/todos"
+	"github.com/graphql-todo/backend/infrastructure/todos"
 
 	"fmt"
 
