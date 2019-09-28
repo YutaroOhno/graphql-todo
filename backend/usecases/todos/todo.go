@@ -2,8 +2,9 @@ package todos
 
 import (
 	"fmt"
-	"graphql-todo/backend/entities"
-	"graphql-todo/backend/infrastructure/db"
+
+	"github.com/graphql-todo/backend/entities"
+	"github.com/graphql-todo/backend/infrastructure/db"
 )
 
 type TodoUsecase struct {

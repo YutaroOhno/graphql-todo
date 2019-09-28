@@ -1,7 +1,7 @@
 package todos
 
 import (
-	"graphql-todo/backend/entities"
+	"github.com/graphql-todo/backend/entities"
 )
 
 type TodoUsecaseInterface interface {

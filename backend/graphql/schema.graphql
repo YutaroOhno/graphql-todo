@@ -18,5 +18,5 @@ input NewTodo {
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Boolean!
+  createTodo(input: NewTodo!): Todo!
 }

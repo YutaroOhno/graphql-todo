@@ -2,8 +2,9 @@ package graphql
 
 import (
 	"context"
-	"graphql-todo/backend/entities"
-	"graphql-todo/backend/usecases/todos"
+
+	"github.com/graphql-todo/backend/entities"
+	"github.com/graphql-todo/backend/usecases/todos"
 ) // THIS CODE IS A STARTING POINT ONLY. IT WILL NOT BE UPDATED WITH SCHEMA CHANGES.
 
 type Resolver struct {
